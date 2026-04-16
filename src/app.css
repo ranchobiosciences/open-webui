@@ -1,6 +1,22 @@
 @reference "./tailwind.css";
 
 @font-face {
+	font-family: 'Figtree';
+	src: url('/assets/fonts/Figtree-VariableFont_wght.ttf');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Figtree';
+	src: url('/assets/fonts/Figtree-Italic-VariableFont_wght.ttf');
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
 	font-family: 'Inter';
 	src: url('/assets/fonts/Inter-Variable.ttf');
 	font-display: swap;
@@ -119,7 +135,7 @@ textarea::placeholder {
 }
 
 .font-primary {
-	font-family: 'Archivo', 'Vazirmatn', sans-serif;
+	font-family: 'Figtree', 'Vazirmatn', sans-serif;
 }
 
 .drag-region {
