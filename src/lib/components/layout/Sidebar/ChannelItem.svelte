@@ -78,7 +78,7 @@
 		.url.pathname === `/channels/${channel.id}`
 		? 'bg-gray-100 dark:bg-gray-900 selected'
 		: ''} {channel?.type === 'dm' ? 'px-1 py-[3px]' : 'p-1'}  {channel?.unread_count > 0
-		? 'font-medium dark:text-white text-black'
+		? 'font-medium text-white'
 		: ' dark:text-gray-400 text-gray-600'} cursor-pointer select-none"
 >
 	<a
