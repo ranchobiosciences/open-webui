@@ -1004,22 +1004,24 @@
 				class="sidebar px-[0.5625rem] pt-2 pb-1.5 flex justify-between space-x-1 text-gray-600 dark:text-gray-400 sticky top-0 z-10 -mb-3"
 			>
 				<a
-					class="flex shrink-0 items-center rounded-xl px-1 h-full justify-center hover:bg-white/5 dark:hover:bg-gray-850/50 transition no-drag-region"
+					class="flex flex-1 items-center rounded-xl px-1 h-full justify-center hover:bg-white/5 dark:hover:bg-gray-850/50 transition no-drag-region"
 					href="/"
 					draggable="false"
 					on:click={newChatHandler}
 				>
 					<img
 						src="{WEBUI_BASE_URL}/static/arcade-logo.svg"
-						class="h-7 w-auto"
+						class="h-10 w-auto"
 						alt="Rancho BioSciences"
 					/>
 				</a>
 
+				<div class="w-px h-5 bg-white/20 self-center shrink-0"></div>
+
 				<a href="/" class="flex flex-1 px-0.5" on:click={newChatHandler}>
 					<div
 						id="sidebar-webui-name"
-						class=" self-center font-medium text-white text-xl font-primary whitespace-nowrap"
+						class=" self-center font-medium text-white text-2xl font-primary whitespace-nowrap"
 					>
 						{$WEBUI_NAME}
 					</div>
@@ -1043,11 +1045,8 @@
 					</button>
 				</Tooltip>
 
-				<div
-					class="{scrollTop > 0
-						? 'visible'
-						: 'invisible'} sidebar-bg-gradient-to-b bg-linear-to-b from-[#FF8800]/50 dark:from-gray-950 to-transparent from-50% pointer-events-none absolute inset-0 -z-10 -mb-6"
-				></div>
+				<div class="sidebar-bg-gradient-to-b bg-[#163D2F] pointer-events-none absolute inset-x-0 top-0 h-[90%] -z-10"></div>
+
 			</div>
 
 			<div
@@ -1591,7 +1590,7 @@
 
 			<div class="px-1.5 pt-1.5 pb-2 sticky bottom-0 z-10 -mt-3 sidebar">
 				<div
-					class=" sidebar-bg-gradient-to-t bg-linear-to-t from-[#FF8800]/50 dark:from-gray-950 to-transparent from-50% pointer-events-none absolute inset-0 -z-10 -mt-6"
+					class=" sidebar-bg-gradient-to-t bg-[#163D2F] pointer-events-none absolute inset-x-0 bottom-0 h-[80%] -z-10"
 				></div>
 				<div class="flex flex-col font-primary">
 					{#if $user !== undefined && $user !== null}
@@ -1607,7 +1606,7 @@
 							}}
 						>
 							<div
-								class=" flex items-center rounded-2xl py-2 px-1.5 w-full hover:bg-white/5 dark:hover:bg-gray-900/50 transition"
+								class=" flex items-center rounded-2xl py-2 px-1.5 w-full hover:bg-[#FF8800]/25 transition"
 							>
 								<div class=" self-center mr-3 relative">
 									<img

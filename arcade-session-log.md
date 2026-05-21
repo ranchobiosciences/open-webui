@@ -45,3 +45,44 @@
 
 ### Left out
 - static/pyodide/pyodide-lock.json (pre-existing unrelated change)
+| 2026-05-20 | git push -u origin gui_development | Pushed commit 671ce1b9b to GitHub ranchobiosciences/open-webui | done |
+
+## Session: 2026-05-21
+
+### Changes Made
+| Time | File | Change | Status |
+|------|------|--------|--------|
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1007 | Logo anchor: shrink-0 → flex-1 (50% row width) | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1013 | Logo img: h-7 → h-8 (slightly larger) | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1019 | Added semi-transparent vertical divider (w-px h-5 bg-white/20) between logo and Arcade text | done |
+| 2026-05-21 | npm run build | Rebuild frontend after logo/divider refinements | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1014 | Logo img: h-8 → h-10 (+25%) | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1024 | Arcade text: text-xl → text-2xl (+20%) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after size increase | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1051 | Top scroll bar: replaced orange gradient fog with solid bg-[#FF8800]/50 dark:bg-gray-950 | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1596 | Bottom scroll bar: replaced orange gradient fog with solid bg-[#FF8800]/50 dark:bg-gray-950 | done |
+| 2026-05-21 | npm run build | Rebuild frontend after solid scroll bar colors | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1051 | Top bar: inset-0 -mb-6 → inset-x-0 top-0 h-2/3 (remove overflow, cap height ~67%) | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1596 | Bottom bar: inset-0 -mt-6 → inset-x-0 bottom-0 h-2/3 (remove overflow, cap height ~67%) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after scroll bar height fix | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1051 | Removed top scroll bar div entirely | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1591 | Bottom bar: h-2/3 → h-3/4 (+10% height) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after scroll bar cleanup | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1591 | Bottom bar: h-3/4 → h-[77%] (+2%, covers above profile icon) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after bottom bar height nudge | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1591 | Bottom bar: h-[77%] → h-[78%], bg-[#FF8800]/50 → bg-[#FF8800] (solid brand orange) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after bottom bar color + height final tweak | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1591 | Bottom bar: h-[78%] → h-[79%], bg-[#FF8800] → bg-[#CC6E00] (darker solid orange) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after darker orange + height nudge | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1591 | Bottom bar: bg-[#CC6E00] dark:bg-gray-950 → bg-[#A65800] (65% brightness, unified light+dark) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after unified darker orange bar | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1048 | Re-added top bar: solid bg-[#163D2F] (dark green, h-2/3, anchored to bottom of header) | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1593 | Bottom bar: bg-[#A65800] → bg-[#163D2F] (dark green, unified both modes) | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1609 | Profile selector: hover:bg-white/5 dark:hover:bg-gray-900/50 → hover:bg-[#FF8800]/25 (light orange, both modes) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after green bars + orange profile hover | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1048 | Top bar: bottom-0 → top-0 (anchor to top of header, covers logo area) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after top bar anchor fix | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1048 | Top bar: h-2/3 → h-[90%] (+34%, extends to cover full logo) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after top bar height extension | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1593 | Bottom bar: h-[79%] → h-[80%] (+1%) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after bottom bar nudge | done |
