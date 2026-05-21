@@ -1011,7 +1011,7 @@
 				>
 					<img
 						src="{WEBUI_BASE_URL}/static/arcade-logo.svg"
-						class="h-10 w-auto"
+						class="h-12 w-auto"
 						alt="Rancho BioSciences"
 					/>
 				</a>
@@ -1045,7 +1045,6 @@
 					</button>
 				</Tooltip>
 
-				<div class="sidebar-bg-gradient-to-b bg-[#163D2F] pointer-events-none absolute inset-x-0 top-0 h-[90%] -z-10"></div>
 
 			</div>
 
@@ -1590,7 +1589,7 @@
 
 			<div class="px-1.5 pt-1.5 pb-2 sticky bottom-0 z-10 -mt-3 sidebar">
 				<div
-					class=" sidebar-bg-gradient-to-t bg-[#163D2F] pointer-events-none absolute inset-x-0 bottom-0 h-[80%] -z-10"
+					class=" sidebar-bg-gradient-to-t bg-[#163D2F] pointer-events-none absolute inset-x-0 bottom-0 h-full -z-10"
 				></div>
 				<div class="flex flex-col font-primary">
 					{#if $user !== undefined && $user !== null}

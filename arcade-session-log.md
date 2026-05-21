@@ -86,3 +86,10 @@
 | 2026-05-21 | npm run build | Rebuild frontend after top bar height extension | done |
 | 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1593 | Bottom bar: h-[79%] → h-[80%] (+1%) | done |
 | 2026-05-21 | npm run build | Rebuild frontend after bottom bar nudge | done |
+| 2026-05-21 | git commit b4c535a9c | Committed session 2 changes to gui_development | done |
+| 2026-05-21 | git push origin gui_development | Pushed 671ce1b9b..b4c535a9c to GitHub | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1048 | Removed top bar div entirely | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1014 | Logo: h-10 → h-12 (48px, +20%) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after top bar removal + logo size increase | done |
+| 2026-05-21 | src/lib/components/layout/Sidebar.svelte:1592 | Bottom bar: h-[80%] → h-full (covers full sticky container incl. profile row) | done |
+| 2026-05-21 | npm run build | Rebuild frontend after bottom bar full height | done |
