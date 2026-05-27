@@ -1589,7 +1589,7 @@
 
 			<div class="px-1.5 pt-1.5 pb-2 sticky bottom-0 z-10 -mt-3 sidebar">
 				<div
-					class=" sidebar-bg-gradient-to-t bg-[#163D2F] pointer-events-none absolute inset-x-0 bottom-0 h-full -z-10"
+					class=" sidebar-bg-gradient-to-t bg-gradient-to-t from-[#163D2F] via-[#1A4B38] to-[#1F5941] pointer-events-none absolute inset-x-0 bottom-0 h-full -z-10"
 				></div>
 				<div class="flex flex-col font-primary">
 					{#if $user !== undefined && $user !== null}
