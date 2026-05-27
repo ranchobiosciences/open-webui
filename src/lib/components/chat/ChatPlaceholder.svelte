@@ -83,14 +83,22 @@
 		{/if}
 
 		<div
-			class=" mt-2 mb-4 text-3xl text-gray-800 dark:text-gray-100 text-left flex items-center gap-4 font-primary"
+			class=" mt-2 mb-4 text-left font-primary"
 		>
 			<div>
-				<div class=" capitalize line-clamp-1" in:fade={{ duration: 200 }}>
+				<div class="text-3xl text-gray-800 dark:text-gray-100 font-semibold line-clamp-1" in:fade={{ duration: 200 }}>
+					Hi, {$user?.name?.split(' ')[0] ?? $user?.name}!
+				</div>
+
+				<div class="mt-1 mb-3 text-sm text-gray-500 dark:text-gray-400" in:fade={{ duration: 200, delay: 100 }}>
+					Welcome to Rancho's AI Arcade. To keep sessions safe and compliant, please avoid entering personal, proprietary, or sensitive information.
+				</div>
+
+				<div class="text-2xl text-gray-800 dark:text-gray-100 capitalize line-clamp-1" in:fade={{ duration: 200, delay: 150 }}>
 					{#if models[selectedModelIdx]?.name}
 						{models[selectedModelIdx]?.name}
 					{:else}
-						{$i18n.t('Hello, {{name}}', { name: $user?.name })}
+						&nbsp;
 					{/if}
 				</div>
 

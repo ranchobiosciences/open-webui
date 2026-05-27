@@ -57,3 +57,14 @@ After  (selected, normal mode): border-b-2 border-[#1F5941]
 Affected lines: 645, 669, 694, 720, 745, 769, 793, 817, 841
 
 ---
+### Step 6 - Welcome Greeting + Custom Message (2026-05-27)
+**Files:** src/lib/components/chat/ChatPlaceholder.svelte, Placeholder.svelte
+**Status:** DONE
+
+Added always-visible personalized greeting and welcome message above model name.
+- Greeting: Hi, <firstname>! (parsed from user.name, first word only)
+- Welcome text: Welcome to Rancho's AI Arcade. To keep sessions safe and compliant, please avoid entering personal, proprietary, or sensitive information.
+- Model name display retained below, sized down to text-2xl
+
+---
+
