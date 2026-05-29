@@ -1004,14 +1004,14 @@
 				class="sidebar px-[0.5625rem] pt-2 pb-1.5 flex justify-between space-x-1 text-gray-600 dark:text-gray-400 sticky top-0 z-10 -mb-3"
 			>
 				<a
-					class="flex flex-1 items-center rounded-xl px-1 h-full justify-center hover:bg-white/5 dark:hover:bg-gray-850/50 transition no-drag-region"
+					class="flex flex-shrink-0 items-center rounded-xl px-1 h-full hover:bg-white/5 dark:hover:bg-gray-850/50 transition no-drag-region"
 					href="/"
 					draggable="false"
 					on:click={newChatHandler}
 				>
 					<img
 						src="{WEBUI_BASE_URL}/static/arcade-logo.svg"
-						class="h-12 w-auto"
+						class="h-8 w-auto"
 						alt="Rancho BioSciences"
 					/>
 				</a>
