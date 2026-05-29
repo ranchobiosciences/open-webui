@@ -68,3 +68,17 @@ Added always-visible personalized greeting and welcome message above model name.
 
 ---
 
+
+### Step 7 - Greeting: Size, Color and Punctuation Iterations (2026-05-28)
+**Files:** src/lib/components/chat/ChatPlaceholder.svelte, Placeholder.svelte
+**Status:** DONE
+
+Iterated on Hi, <name> greeting styling:
+- Punctuation: changed ! to . (more professional)
+- Tested orange (#FF8800, Pantone 151C) - rejected, did not flow with theme
+- Tested brand green (#1F5941) light / (#5DBE8A) dark - rejected
+- Tested same green (#1F5941) both modes - rejected
+- Final: text-[45px] text-gray-800 dark:text-gray-100 (black light / white dark)
+- Size 45px kept - flows well with layout
+
+---

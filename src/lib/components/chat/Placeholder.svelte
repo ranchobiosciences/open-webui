@@ -106,8 +106,8 @@
 					}}
 				/>
 			{:else}
-				<div class="text-3xl text-gray-800 dark:text-gray-100 font-semibold mb-1" in:fade={{ duration: 100 }}>
-					Hi, {$user?.name?.split(' ')[0] ?? $user?.name}!
+				<div class="text-[45px] text-gray-800 dark:text-gray-100 font-semibold mb-1" in:fade={{ duration: 100 }}>
+					Hi, {$user?.name?.split(' ')[0] ?? $user?.name}.
 				</div>
 
 				<div class="mt-1 mb-4 text-sm text-gray-500 dark:text-gray-400 max-w-xl" in:fade={{ duration: 100, delay: 50 }}>

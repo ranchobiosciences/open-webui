@@ -86,8 +86,8 @@
 			class=" mt-2 mb-4 text-left font-primary"
 		>
 			<div>
-				<div class="text-3xl text-gray-800 dark:text-gray-100 font-semibold line-clamp-1" in:fade={{ duration: 200 }}>
-					Hi, {$user?.name?.split(' ')[0] ?? $user?.name}!
+				<div class="text-[45px] text-gray-800 dark:text-gray-100 font-semibold line-clamp-1" in:fade={{ duration: 200 }}>
+					Hi, {$user?.name?.split(' ')[0] ?? $user?.name}.
 				</div>
 
 				<div class="mt-1 mb-3 text-sm text-gray-500 dark:text-gray-400" in:fade={{ duration: 200, delay: 100 }}>
