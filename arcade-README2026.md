@@ -25,16 +25,16 @@ Anthropic, Google) and adds RAG, tools, OAuth, and admin controls.
 
 ## 2. Stack at a glance
 
-| Layer        | Tech                                                    |
-| ------------ | ------------------------------------------------------- |
-| Frontend     | SvelteKit 5 + TypeScript + Tailwind 4 + Vite 5          |
-| Backend      | FastAPI + uvicorn + SQLAlchemy (Python 3.11)            |
-| DB           | SQLite (default) / Postgres / MySQL via SQLAlchemy      |
-| Realtime     | Socket.IO (path `/ws/socket.io`)                        |
-| Vector store | ChromaDB (default) / OpenSearch                         |
-| Auth         | OIDC (Azure AD), JWT, optional LDAP                     |
-| Process mgr  | `systemd` unit `open-webui.service`                     |
-| Reverse proxy| (Upstream — terminates HTTPS for `test-arcade.rbsdev.net`, proxies to `localhost:8080`) |
+| Layer         | Tech                                                                                    |
+| ------------- | --------------------------------------------------------------------------------------- |
+| Frontend      | SvelteKit 5 + TypeScript + Tailwind 4 + Vite 5                                          |
+| Backend       | FastAPI + uvicorn + SQLAlchemy (Python 3.11)                                            |
+| DB            | SQLite (default) / Postgres / MySQL via SQLAlchemy                                      |
+| Realtime      | Socket.IO (path `/ws/socket.io`)                                                        |
+| Vector store  | ChromaDB (default) / OpenSearch                                                         |
+| Auth          | OIDC (Azure AD), JWT, optional LDAP                                                     |
+| Process mgr   | `systemd` unit `open-webui.service`                                                     |
+| Reverse proxy | (Upstream — terminates HTTPS for `test-arcade.rbsdev.net`, proxies to `localhost:8080`) |
 
 The single FastAPI process serves **both the API and the built static frontend**
 on port `8080`. There is no separate web server for the frontend in production.
@@ -144,6 +144,7 @@ on port `8080`. There is no separate web server for the frontend in production.
 
 **Permissions note**: most files are owned by `kabenla:openwebdev`. To write
 inside `/opt/open-webui` your user must be in the `openwebdev` group:
+
 ```bash
 groups            # check — should include `openwebdev`
 sudo usermod -aG openwebdev $USER && exit   # add yourself, then reconnect SSH
@@ -197,9 +198,9 @@ The browser tab title is set in `src/routes/+layout.svelte`:
 
 ```svelte
 <svelte:head>
-    <title>{$WEBUI_NAME}</title>
-    <meta name="apple-mobile-web-app-title" content={$WEBUI_NAME} />
-    <meta name="description" content={$WEBUI_NAME} />
+	<title>{$WEBUI_NAME}</title>
+	<meta name="apple-mobile-web-app-title" content={$WEBUI_NAME} />
+	<meta name="description" content={$WEBUI_NAME} />
 </svelte:head>
 ```
 
@@ -207,13 +208,13 @@ The browser tab title is set in `src/routes/+layout.svelte`:
 
 ```ts
 import { APP_NAME } from '$lib/constants';
-export const WEBUI_NAME = writable(APP_NAME);  // default before backend responds
+export const WEBUI_NAME = writable(APP_NAME); // default before backend responds
 ```
 
 It's overwritten on app load by:
 
 ```ts
-const backendConfig = await getBackendConfig();   // GET /api/config
+const backendConfig = await getBackendConfig(); // GET /api/config
 await WEBUI_NAME.set(backendConfig.name);
 ```
 
@@ -224,17 +225,17 @@ So the **source of truth for the platform name lives on the backend** — see §
 All cross-component state lives in `src/lib/stores/index.ts` as Svelte writable
 stores. Major ones:
 
-| Store              | Holds                                          |
-| ------------------ | ---------------------------------------------- |
-| `config`           | full backend config blob                       |
-| `user`             | current session user                           |
-| `WEBUI_NAME`       | platform display name                          |
-| `WEBUI_VERSION`    | running version reported by backend            |
-| `theme`            | current theme (`'system' \| 'dark' \| 'light' \| 'her' \| 'oled-dark'`) |
-| `socket`           | live Socket.IO connection                      |
-| `chats`, `chatId`  | chat list and active chat                      |
-| `models`, `tools`  | available models / tools                       |
-| `mobile`, `isApp`  | viewport / electron flags                      |
+| Store             | Holds                                                                   |
+| ----------------- | ----------------------------------------------------------------------- |
+| `config`          | full backend config blob                                                |
+| `user`            | current session user                                                    |
+| `WEBUI_NAME`      | platform display name                                                   |
+| `WEBUI_VERSION`   | running version reported by backend                                     |
+| `theme`           | current theme (`'system' \| 'dark' \| 'light' \| 'her' \| 'oled-dark'`) |
+| `socket`          | live Socket.IO connection                                               |
+| `chats`, `chatId` | chat list and active chat                                               |
+| `models`, `tools` | available models / tools                                                |
+| `mobile`, `isApp` | viewport / electron flags                                               |
 
 ### 5.5 API client (`src/lib/apis`)
 
@@ -295,6 +296,7 @@ Three layers, lowest-precedence first:
 
 1. **OS environment** (read once at startup): `backend/open_webui/env.py`.
    Each `os.environ.get(...)` becomes a module constant.
+
    ```python
    WEBUI_NAME = os.environ.get("WEBUI_NAME", "Open WebUI")
    if WEBUI_NAME != "Open WebUI":
@@ -304,6 +306,7 @@ Three layers, lowest-precedence first:
 2. **PersistentConfig** (DB-backed, can be edited live in `/admin/settings`):
    `backend/open_webui/config.py`. Wraps env values so admins can override at
    runtime. Stored in the `config` table.
+
    ```python
    ENABLE_TITLE_GENERATION = PersistentConfig(
        "ENABLE_TITLE_GENERATION", "task.title.enable",
@@ -360,6 +363,7 @@ if os.path.exists(FRONTEND_BUILD_DIR):
 
 ⚠ **The `WEBUI_NAME` quirk**: `env.py` lines 135–137 append `" (Open WebUI)"`
 to your custom name. To get a clean name (e.g. just "Arcade"), either:
+
 - comment out lines 136–137 of `env.py`, **or**
 - set `WEBUI_NAME=Arcade` and accept "Arcade (Open WebUI)" in the UI.
 
@@ -367,23 +371,23 @@ to your custom name. To get a clean name (e.g. just "Arcade"), either:
 
 ## 8. Where logs and runtime data live
 
-| Thing                | Path / command                                        |
-| -------------------- | ----------------------------------------------------- |
-| App stdout / stderr  | `journalctl -u open-webui.service -f`                 |
-| Service state        | `systemctl status open-webui.service`                 |
+| Thing                  | Path / command                                                  |
+| ---------------------- | --------------------------------------------------------------- |
+| App stdout / stderr    | `journalctl -u open-webui.service -f`                           |
+| Service state          | `systemctl status open-webui.service`                           |
 | App data (DB, uploads) | `WEBUI_DATA_DIR` = `/home/openwebui/openwebui/app/backend/data` |
-| Web access logs      | (upstream proxy — not on this box)                    |
-| Build artifact       | `/opt/open-webui/build/`                              |
+| Web access logs        | (upstream proxy — not on this box)                              |
+| Build artifact         | `/opt/open-webui/build/`                                        |
 
 ---
 
 ## 9. Permissions model (on this server)
 
-| Group / user         | Can                                                    |
-| -------------------- | ------------------------------------------------------ |
-| `openwebui` (system) | Run the service. Owns runtime data dir.                |
-| `openwebdev` group   | Read/write the source tree at `/opt/open-webui/`.      |
-| `sudo` group         | Restart the service, edit the systemd unit, etc.       |
+| Group / user         | Can                                               |
+| -------------------- | ------------------------------------------------- |
+| `openwebui` (system) | Run the service. Owns runtime data dir.           |
+| `openwebdev` group   | Read/write the source tree at `/opt/open-webui/`. |
+| `sudo` group         | Restart the service, edit the systemd unit, etc.  |
 
 **To make code changes** you need `openwebdev`. **To restart the service** you
 need `sudo`. (Note: the service auto-reloads Python changes, so `sudo` is only
@@ -436,5 +440,5 @@ grep -rn 'Open WebUI' src/                 # hardcoded brand strings
 
 ---
 
-*End of repo reference. For "how do I make a change and ship it" see
-`arcade-DEVPLAN-2026.md`.*
+_End of repo reference. For "how do I make a change and ship it" see
+`arcade-DEVPLAN-2026.md`._
