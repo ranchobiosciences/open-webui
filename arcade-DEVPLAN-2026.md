@@ -15,17 +15,21 @@
 ## 0. Pre-flight (one-time setup, do this once)
 
 ### 0.1 Verify SSH access
+
 ```bash
 ssh -p 2212 aishpathak@rbsdev.net          # or `ssh rbsdev` if ~/.ssh/config alias is set
 ```
 
 ### 0.2 Verify group membership
+
 ```bash
 groups
 # must include: openwebdev   ← required to write inside /opt/open-webui
 # must include: sudo         ← required to restart the systemd service
 ```
+
 If `openwebdev` is missing:
+
 ```bash
 sudo usermod -aG openwebdev $USER
 exit                                       # log out
@@ -34,6 +38,7 @@ groups                                     # verify openwebdev now appears
 ```
 
 ### 0.3 Tell git who you are
+
 ```bash
 git config --global user.name  "Aish Pathak"
 git config --global user.email "aish.pathak@ranchobiosciences.com"
@@ -42,6 +47,7 @@ git config --global --add safe.directory /opt/open-webui/.git
 ```
 
 ### 0.4 Have GitHub credentials ready
+
 You will need to push to `https://github.com/ranchobiosciences/open-webui.git`.
 Use a **personal access token** (PAT) — not your password — when git prompts.
 Generate one at <https://github.com/settings/tokens> with `repo` scope. Save it
@@ -99,9 +105,10 @@ git checkout -b feat/short-descriptive-name      # e.g. feat/rename-arcade
 ```
 
 Branch naming convention:
-- `feat/...`    new feature / change
-- `fix/...`     bug fix
-- `chore/...`   non-functional (deps, formatting, docs)
+
+- `feat/...` new feature / change
+- `fix/...` bug fix
+- `chore/...` non-functional (deps, formatting, docs)
 
 ### Step 2 — Make your edits
 
@@ -157,6 +164,7 @@ If git prompts for credentials, paste your **GitHub username + PAT**.
 
 On GitHub: <https://github.com/ranchobiosciences/open-webui/pulls> → "New pull
 request" → base = `main`, compare = `feat/rename-arcade`. Fill out:
+
 - **What** changed (1–2 sentences)
 - **Why**
 - **How to test** (URL, what to click, expected behavior)
@@ -185,12 +193,12 @@ This is the simplest possible change because **most of it is config, not code**.
 
 ### 3a. Decide the depth of the rename
 
-| Change                               | Where                              | Code edit? |
-| ------------------------------------ | ---------------------------------- | ---------- |
-| Tab title, sidebar header, login screen | `WEBUI_NAME` env var          | No         |
-| Drop the `(Open WebUI)` suffix       | `backend/open_webui/env.py:136-137`| Yes (1 line) |
-| Logo on splash / sidebar             | `/static/splash*.png`, `favicon*`  | No (file replace) |
-| Hardcoded "Open WebUI" in tooltips/components | `src/lib/components/...`  | Yes (Svelte edits + rebuild) |
+| Change                                        | Where                               | Code edit?                   |
+| --------------------------------------------- | ----------------------------------- | ---------------------------- |
+| Tab title, sidebar header, login screen       | `WEBUI_NAME` env var                | No                           |
+| Drop the `(Open WebUI)` suffix                | `backend/open_webui/env.py:136-137` | Yes (1 line)                 |
+| Logo on splash / sidebar                      | `/static/splash*.png`, `favicon*`   | No (file replace)            |
+| Hardcoded "Open WebUI" in tooltips/components | `src/lib/components/...`            | Yes (Svelte edits + rebuild) |
 
 For a **full** rename, do all four. For a **quick** rename, just the first row
 gets you 90% there.
@@ -204,6 +212,7 @@ git checkout -b feat/rename-arcade
 ```
 
 Edit `.env`:
+
 ```bash
 nano .env
 # add or change this line:
@@ -212,20 +221,24 @@ WEBUI_NAME=Arcade
 
 (If you also want to drop the `(Open WebUI)` suffix that `env.py` appends,
 edit `backend/open_webui/env.py` and comment out lines 136–137:
+
 ```python
 WEBUI_NAME = os.environ.get("WEBUI_NAME", "Open WebUI")
 # if WEBUI_NAME != "Open WebUI":          # disabled to allow clean custom name
 #     WEBUI_NAME += " (Open WebUI)"
 ```
+
 )
 
 Restart:
+
 ```bash
 sudo systemctl restart open-webui
 journalctl -u open-webui.service -n 30 --no-pager   # confirm clean startup
 ```
 
 Test:
+
 1. Open `https://test-arcade.rbsdev.net` → tab title should say "Arcade".
 2. Log out → login screen header should say "Arcade".
 3. Sidebar / About modal → should say "Arcade".
@@ -241,6 +254,7 @@ scp -P 2212 ~/path/to/arcade-favicon.png      aishpathak@rbsdev.net:/opt/open-we
 ```
 
 Recommended sizes:
+
 - `splash.png` / `splash-dark.png` — 512 px tall, transparent PNG
 - `favicon.png` — 256×256 PNG
 - `favicon-96x96.png` — 96×96 PNG
@@ -338,6 +352,7 @@ matching `app.include_router(...)` lower down).
 ### 5b. Watch it auto-reload
 
 Save the file, then:
+
 ```bash
 journalctl -u open-webui.service -f
 # you should see uvicorn detect the change and restart within ~2s
@@ -348,6 +363,7 @@ journalctl -u open-webui.service -f
 ```bash
 curl -H "Authorization: Bearer <JWT>" https://test-arcade.rbsdev.net/api/v1/<your-route>/hello
 ```
+
 (The JWT is in `localStorage.token` after you log in via the browser.)
 
 ### 5d. Add a frontend call (optional)
@@ -427,37 +443,37 @@ removes the last local commit. **Never** force-push to `main`.
 
 ## 9. Common pitfalls & gotchas
 
-| Symptom                                                    | Likely cause                                               | Fix |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | --- |
-| Edit isn't visible in the browser                          | Browser cache                                              | Hard-refresh `Ctrl+Shift+R`. |
-| Frontend edit isn't visible even after hard-refresh        | Forgot `npm run build`                                     | `cd /opt/open-webui && npm run build` |
-| `.env` change isn't taking effect                          | Service wasn't restarted                                   | `sudo systemctl restart open-webui` |
-| Brand name shows as "Arcade (Open WebUI)"                  | `env.py` lines 136–137 add the suffix                      | Comment out those two lines (see §3b). |
-| 500s after a backend edit                                  | Syntax error — `--reload` started a broken worker          | `journalctl -u open-webui.service -n 50` to see the traceback |
-| `git push` rejected                                        | Branch already exists / not authorized                     | Pull-rebase, or check your GitHub PAT scope |
-| `Permission denied` editing files in `/opt/open-webui`     | Not in `openwebdev` group                                  | See §0.2 |
-| OAuth login bounces back to login screen                   | `WEBUI_URL` or `OPENID_REDIRECT_URI` mismatch in `.env`    | Confirm both still match `https://test-arcade.rbsdev.net` |
-| Sockets/streaming disconnect after deploy                  | `WEBUI_VERSION`/`WEBUI_DEPLOYMENT_ID` changed → frontend forced reload | This is by design; tell users to hard-refresh once. |
+| Symptom                                                | Likely cause                                                           | Fix                                                           |
+| ------------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Edit isn't visible in the browser                      | Browser cache                                                          | Hard-refresh `Ctrl+Shift+R`.                                  |
+| Frontend edit isn't visible even after hard-refresh    | Forgot `npm run build`                                                 | `cd /opt/open-webui && npm run build`                         |
+| `.env` change isn't taking effect                      | Service wasn't restarted                                               | `sudo systemctl restart open-webui`                           |
+| Brand name shows as "Arcade (Open WebUI)"              | `env.py` lines 136–137 add the suffix                                  | Comment out those two lines (see §3b).                        |
+| 500s after a backend edit                              | Syntax error — `--reload` started a broken worker                      | `journalctl -u open-webui.service -n 50` to see the traceback |
+| `git push` rejected                                    | Branch already exists / not authorized                                 | Pull-rebase, or check your GitHub PAT scope                   |
+| `Permission denied` editing files in `/opt/open-webui` | Not in `openwebdev` group                                              | See §0.2                                                      |
+| OAuth login bounces back to login screen               | `WEBUI_URL` or `OPENID_REDIRECT_URI` mismatch in `.env`                | Confirm both still match `https://test-arcade.rbsdev.net`     |
+| Sockets/streaming disconnect after deploy              | `WEBUI_VERSION`/`WEBUI_DEPLOYMENT_ID` changed → frontend forced reload | This is by design; tell users to hard-refresh once.           |
 
 ---
 
 ## 10. Glossary of operations
 
-| I want to ...                                  | Run                                                |
-| ---------------------------------------------- | -------------------------------------------------- |
-| See if the service is running                  | `systemctl status open-webui`                      |
-| Restart the service                            | `sudo systemctl restart open-webui`                |
-| Tail logs                                      | `journalctl -u open-webui.service -f`              |
-| Search logs for an error in the last hour      | `journalctl -u open-webui.service --since "1 hour ago" \| grep -i error` |
-| Rebuild the frontend                           | `cd /opt/open-webui && npm run build`              |
-| Run a dev frontend with hot-reload             | `cd /opt/open-webui && npm run dev` (port 5173)    |
-| Format code                                    | `npm run format` and `npm run format:backend`      |
-| Lint                                           | `npm run lint`                                     |
-| Show what files I've changed                   | `git status` and `git diff`                        |
-| Discard a single uncommitted file              | `git checkout -- <file>`                           |
-| See recent commits                             | `git log --oneline -20`                            |
-| Switch to someone else's branch                | `git fetch origin && git checkout <branch>`        |
-| See env vars the service is using              | `sudo cat /etc/systemd/system/open-webui.service`  |
+| I want to ...                             | Run                                                                      |
+| ----------------------------------------- | ------------------------------------------------------------------------ |
+| See if the service is running             | `systemctl status open-webui`                                            |
+| Restart the service                       | `sudo systemctl restart open-webui`                                      |
+| Tail logs                                 | `journalctl -u open-webui.service -f`                                    |
+| Search logs for an error in the last hour | `journalctl -u open-webui.service --since "1 hour ago" \| grep -i error` |
+| Rebuild the frontend                      | `cd /opt/open-webui && npm run build`                                    |
+| Run a dev frontend with hot-reload        | `cd /opt/open-webui && npm run dev` (port 5173)                          |
+| Format code                               | `npm run format` and `npm run format:backend`                            |
+| Lint                                      | `npm run lint`                                                           |
+| Show what files I've changed              | `git status` and `git diff`                                              |
+| Discard a single uncommitted file         | `git checkout -- <file>`                                                 |
+| See recent commits                        | `git log --oneline -20`                                                  |
+| Switch to someone else's branch           | `git fetch origin && git checkout <branch>`                              |
+| See env vars the service is using         | `sudo cat /etc/systemd/system/open-webui.service`                        |
 
 ---
 
@@ -478,5 +494,5 @@ cleanup) without risking breakage. **Do this first.**
 
 ---
 
-*End of developer plan. Pair this with `arcade-README2026.md` for the
-architectural reference.*
+_End of developer plan. Pair this with `arcade-README2026.md` for the
+architectural reference._
