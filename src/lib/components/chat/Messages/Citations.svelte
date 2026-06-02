@@ -178,8 +178,19 @@
 							src="https://www.google.com/s2/favicons?sz=32&domain={citation.source.name}"
 							alt="favicon"
 							class="size-4 rounded-full shrink-0 border border-white dark:border-gray-850 bg-white dark:bg-gray-900"
+							on:error={(e) => {
+								e.target.src = '/favicon.png';
+							}}
 						/>
 					{/each}
+					{#if citations.length > 3}
+						<div
+							class="size-4 rounded-full shrink-0 border border-white dark:border-gray-850 bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-[8px] font-semibold text-gray-500 dark:text-gray-400"
+							aria-hidden="true"
+						>
+							+{citations.length - Math.min(urlCitations.length, 3)}
+						</div>
+					{/if}
 				</div>
 			{/if}
 			<div>

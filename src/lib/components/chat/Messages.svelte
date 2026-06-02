@@ -57,8 +57,12 @@
 
 	export let onSelect = (e) => {};
 
-	export let messagesCount: number | null = 20;
+	export let messagesCount: number | null = 8;
 	let messagesLoading = false;
+
+	onDestroy(() => {
+		cancelAnimationFrame(pendingRebuild);
+	});
 
 	const loadMoreMessages = async () => {
 		// scroll slightly down to disable continuous loading
@@ -66,7 +70,8 @@
 		element.scrollTop = element.scrollTop + 100;
 
 		messagesLoading = true;
-		messagesCount += 20;
+		messagesCount += 8;
+
 		buildMessages();
 
 		await tick();
@@ -90,11 +95,11 @@
 			}
 			visitedMessageIds.add(message.id);
 
-			_messages.unshift(message);
+			_messages.push(message);
 			message = message.parentId !== null ? history.messages[message.parentId] : null;
 		}
 
-		messages = _messages;
+		messages = _messages.reverse();
 	};
 
 	// Throttle message list rebuilds to once per animation frame during streaming.
@@ -425,10 +430,6 @@
 
 		showMessage({ id: parentMessageId }, false);
 	};
-
-	onDestroy(() => {
-		cancelAnimationFrame(pendingRebuild);
-	});
 
 	const triggerScroll = () => {
 		if (autoScroll) {
