@@ -35,8 +35,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "v${{ steps.get_version.outputs.version }}" \
-            --title "v${{ steps.get_version.outputs.version }}" \
+          gh release create "v${{ steps.get_version.outputs.version }}_rancho" \
+            --title "v${{ steps.get_version.outputs.version }}_rancho" \
             --notes-file /tmp/release-notes.md
 
       - name: Upload package to GitHub release
