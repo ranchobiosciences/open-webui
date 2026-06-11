@@ -1,4 +1,4 @@
 export WEBUI_NAME="Arcade"
-export CORS_ALLOW_ORIGIN="http://localhost:5173;http://localhost:8080;https://test-arcade.rbsdev.net"
+export CORS_ALLOW_ORIGIN="http://localhost:5173;http://localhost:8080;https://test-arcade.rbsdev.net;https://arcade.rbsprod.net"
 PORT="${PORT:-8080}"
 uvicorn open_webui.main:app --port $PORT --host 0.0.0.0 --forwarded-allow-ips "${FORWARDED_ALLOW_IPS:-*}" --reload
