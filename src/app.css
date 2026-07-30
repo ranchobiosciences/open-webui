@@ -930,3 +930,11 @@ html.high-contrast:not(.dark) .shimmer {
 .dark .dark\:text-gray-600 { color: var(--color-gray-400); }
 .dark .dark\:text-gray-500 { color: var(--color-gray-400); }
 .dark .text-gray-500 { color: var(--color-gray-400); }
+
+/* Arcade: the sidebar is a green (dark) surface even in light mode. High-contrast
+   mode darkens muted text for light backgrounds, which makes sidebar titles
+   (folders, chats, etc.) invisible on the green. Keep sidebar text light here;
+   high-contrast still applies everywhere else. */
+html.high-contrast:not(.dark) #sidebar :is(.text-gray-300, .text-gray-400, .text-gray-500, .text-gray-600, .text-gray-700, .text-gray-800, .text-gray-900) {
+	color: var(--color-gray-300, #d1d5db);
+}

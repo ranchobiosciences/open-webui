@@ -152,7 +152,7 @@
 								class="min-w-fit px-1 text-sm inline-flex items-center gap-1 {activeWorkspaceSection ===
 								'models'
 									? 'text-gray-900 dark:text-gray-100'
-									: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition select-none"
+									: 'text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-white'} transition select-none"
 								href="/workspace/models"
 							>
 								<span>{$i18n.t('Models')}</span>
@@ -169,7 +169,7 @@
 								class="min-w-fit px-1 text-sm inline-flex items-center gap-1 {activeWorkspaceSection ===
 								'knowledge'
 									? 'text-gray-900 dark:text-gray-100'
-									: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition select-none"
+									: 'text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-white'} transition select-none"
 								href="/workspace/knowledge"
 							>
 								<span>{$i18n.t('Knowledge')}</span>
@@ -186,7 +186,7 @@
 								class="min-w-fit px-1 text-sm inline-flex items-center gap-1 {activeWorkspaceSection ===
 								'prompts'
 									? 'text-gray-900 dark:text-gray-100'
-									: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition select-none"
+									: 'text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-white'} transition select-none"
 								href="/workspace/prompts"
 							>
 								<span>{$i18n.t('Prompts')}</span>
@@ -203,7 +203,7 @@
 								class="min-w-fit px-1 text-sm inline-flex items-center gap-1 {activeWorkspaceSection ===
 								'skills'
 									? 'text-gray-900 dark:text-gray-100'
-									: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition select-none"
+									: 'text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-white'} transition select-none"
 								href="/workspace/skills"
 							>
 								<span>{$i18n.t('Skills')}</span>
@@ -220,7 +220,7 @@
 								class="min-w-fit px-1 text-sm inline-flex items-center gap-1 {activeWorkspaceSection ===
 								'tools'
 									? 'text-gray-900 dark:text-gray-100'
-									: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition select-none"
+									: 'text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-white'} transition select-none"
 								href="/workspace/tools"
 							>
 								<span>{$i18n.t('Tools')}</span>
