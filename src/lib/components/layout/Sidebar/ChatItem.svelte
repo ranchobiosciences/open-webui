@@ -505,13 +505,13 @@
 			id="sidebar-chat-item"
 			class=" w-full flex justify-between rounded-xl px-2 py-[6px] {id === $chatId || confirmEdit
 				? ($settings?.highContrastMode ?? false)
-					? 'bg-black/[0.035] dark:bg-white/[0.06] selected'
-					: 'bg-black/[0.035] dark:bg-white/[0.045] selected'
+					? 'bg-white/20 dark:bg-gray-900 selected'
+					: 'bg-white/20 dark:bg-gray-900 selected'
 				: selected
 					? ($settings?.highContrastMode ?? false)
-						? 'bg-black/[0.035] dark:bg-white/[0.055] selected'
-						: 'bg-black/[0.035] dark:bg-white/[0.045] selected'
-					: 'hover:bg-gray-50 dark:hover:bg-gray-900 group-hover:bg-gray-50 dark:group-hover:bg-gray-900'}  whitespace-nowrap text-ellipsis relative transition {generating
+						? 'bg-white/20 dark:bg-gray-900 selected'
+						: 'bg-white/20 dark:bg-gray-900 selected'
+					: 'group-hover:bg-white/10 dark:group-hover:bg-gray-900'}  whitespace-nowrap text-ellipsis relative transition {generating
 				? 'cursor-not-allowed'
 				: ''}"
 		>
@@ -550,13 +550,13 @@
 				id="sidebar-chat-item"
 				class=" w-full flex justify-between rounded-xl px-2 py-[6px] {id === $chatId || confirmEdit
 					? ($settings?.highContrastMode ?? false)
-						? 'bg-black/[0.035] dark:bg-white/[0.06] selected'
-						: 'bg-black/[0.035] dark:bg-white/[0.045] selected'
+						? 'bg-white/20 dark:bg-gray-900 selected'
+						: 'bg-white/20 dark:bg-gray-900 selected'
 					: selected
 						? ($settings?.highContrastMode ?? false)
-							? 'bg-black/[0.035] dark:bg-white/[0.055] selected'
-							: 'bg-black/[0.035] dark:bg-white/[0.045] selected'
-						: ' hover:bg-gray-50 dark:hover:bg-gray-900 group-hover:bg-gray-50 dark:group-hover:bg-gray-900'}  whitespace-nowrap text-ellipsis transition"
+							? 'bg-white/20 dark:bg-gray-900 selected'
+							: 'bg-white/20 dark:bg-gray-900 selected'
+						: ' group-hover:bg-white/10 dark:group-hover:bg-gray-900'}  whitespace-nowrap text-ellipsis transition"
 				href="/c/{id}"
 				aria-current={id === $chatId ? 'page' : undefined}
 				onclick={() => {
@@ -605,13 +605,13 @@
 				<div class="flex self-center flex-1 w-full min-w-0">
 					{#if unread}
 						<div class="shrink-0 self-center pr-2.5 flex transition-opacity duration-300">
-							<div class="size-1.5 bg-sky-500 rounded-full"></div>
+							<div class="size-1.5 bg-[#FF8800] rounded-full"></div>
 						</div>
 					{/if}
 					<div
 						dir="auto"
 						class="text-left self-center overflow-hidden w-full h-[20px] truncate {unread
-							? 'font-normal text-gray-800 dark:text-gray-200'
+							? 'font-normal text-white'
 							: ''} {showInlineActions && !readonly ? 'pr-12' : ''}"
 					>
 						{title}

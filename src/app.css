@@ -918,3 +918,15 @@ html.high-contrast:not(.dark) .shimmer {
 	color: var(--color-gray-700);
 	-webkit-text-fill-color: var(--color-gray-700);
 }
+
+/* Arcade fork fonts + classes (restored after v0.11 merge) */
+@font-face { font-family: "Archivo"; src: url("/assets/fonts/Archivo-Variable.ttf"); font-display: swap; }
+@font-face { font-family: "Mona Sans"; src: url("/assets/fonts/Mona-Sans.woff2"); font-display: swap; }
+@font-face { font-family: "InstrumentSerif"; src: url("/assets/fonts/InstrumentSerif-Regular.ttf"); font-display: swap; }
+.font-primary { font-family: "Archivo", "Vazirmatn", sans-serif; }
+.font-secondary { font-family: "InstrumentSerif", sans-serif; }
+
+/* Arcade: dim muted grays were hard to read in dark mode — lighten a step to gray-400 */
+.dark .dark\:text-gray-600 { color: var(--color-gray-400); }
+.dark .dark\:text-gray-500 { color: var(--color-gray-400); }
+.dark .text-gray-500 { color: var(--color-gray-400); }

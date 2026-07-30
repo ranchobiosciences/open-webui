@@ -930,7 +930,7 @@
 
 {#if !$mobile && !$showSidebar}
 	<div
-		class=" w-[42px] shrink-0 py-1 px-1 flex flex-col justify-between text-gray-700 dark:text-gray-300 hover:bg-gray-50/30 dark:hover:bg-gray-800/30 h-full z-10 transition-all border-e-[0.5px] border-gray-50 dark:border-gray-850/30"
+		class=" w-[42px] shrink-0 py-1 px-1 flex flex-col justify-between text-gray-100 hover:bg-white/10 dark:hover:bg-gray-900 h-full z-10 transition-all border-e-[0.5px] border-gray-50 dark:border-gray-850/30"
 		id="sidebar"
 		role="navigation"
 		aria-label={$i18n.t('Chat history')}
@@ -953,7 +953,7 @@
 						aria-label={$showSidebar ? $i18n.t('Close Sidebar') : $i18n.t('Open Sidebar')}
 					>
 						<div
-							class=" self-center flex size-[30px] items-center justify-center rounded-lg transition group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
+							class=" self-center flex size-[30px] items-center justify-center rounded-lg transition group-hover:bg-white/10 dark:group-hover:bg-gray-900"
 						>
 							<img
 								src="{WEBUI_BASE_URL}/static/favicon.png"
@@ -984,7 +984,7 @@
 							aria-label={$i18n.t('New Chat')}
 						>
 							<div
-								class=" self-center flex size-[30px] items-center justify-center rounded-lg transition group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
+								class=" self-center flex size-[30px] items-center justify-center rounded-lg transition group-hover:bg-white/10 dark:group-hover:bg-gray-900"
 							>
 								<EditPencilIcon className="size-4" strokeWidth="1.5" />
 							</div>
@@ -1006,7 +1006,7 @@
 							aria-label={$i18n.t('Search')}
 						>
 							<div
-								class=" self-center flex size-[30px] items-center justify-center rounded-lg transition group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
+								class=" self-center flex size-[30px] items-center justify-center rounded-lg transition group-hover:bg-white/10 dark:group-hover:bg-gray-900"
 							>
 								<SearchIcon className="size-4" strokeWidth="1.5" />
 							</div>
@@ -1035,9 +1035,9 @@
 										class=" self-center flex size-[30px] items-center justify-center rounded-lg transition {itemId ===
 										activeMenuItemId
 											? ($settings?.highContrastMode ?? false)
-												? 'bg-black/[0.035] dark:bg-white/[0.06]'
-												: 'bg-black/[0.035] dark:bg-white/[0.045]'
-											: 'group-hover:bg-gray-50 dark:group-hover:bg-gray-900'}"
+												? 'bg-white/20 dark:bg-gray-900'
+												: 'bg-white/20 dark:bg-gray-900'
+											: 'group-hover:bg-white/10 dark:group-hover:bg-gray-900'}"
 									>
 										{#if itemId === 'notes'}
 											<NotesIcon className="size-4" strokeWidth="1.5" />
@@ -1070,7 +1070,7 @@
 								aria-label={$i18n.t('User menu')}
 							>
 								<div
-									class="self-center relative flex size-[30px] items-center justify-center rounded-lg transition group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
+									class="self-center relative flex size-[30px] items-center justify-center rounded-lg transition group-hover:bg-white/10 dark:group-hover:bg-gray-900"
 								>
 									<img
 										src={`${WEBUI_API_BASE_URL}/users/${$user?.id}/profile/image`}
@@ -1113,7 +1113,7 @@
 			? `${$mobile ? 'bg-[#1F5941]' : 'bg-[#1F5941]'} z-50`
 			: ' bg-transparent z-0 '} {$isApp
 			? `ml-[4.5rem] md:ml-0 `
-			: ' transition-all duration-300 '} shrink-0 text-gray-700 dark:text-gray-300 text-[13px] leading-5 fixed top-0 left-0 overflow-x-hidden
+			: ' transition-all duration-300 '} shrink-0 text-gray-100 text-[13px] leading-5 fixed top-0 left-0 overflow-x-hidden
         "
 		transition:slide={{ duration: 250, axis: 'x' }}
 		data-state={$showSidebar}
@@ -1124,10 +1124,10 @@
 				: 'invisible'}"
 		>
 			<div
-				class="sidebar px-1 pt-1.5 pb-1 flex justify-between space-x-1 text-gray-600 dark:text-gray-400 sticky top-0 z-10 -mb-2"
+				class="sidebar px-1 pt-1.5 pb-1 flex justify-between space-x-1 text-gray-200 sticky top-0 z-10 -mb-2"
 			>
 				<a
-					class="flex items-center rounded-xl size-8.5 h-full justify-center hover:bg-gray-50 dark:hover:bg-gray-900 transition no-drag-region"
+					class="flex items-center rounded-xl px-1 h-full transition no-drag-region"
 					href="/"
 					draggable="false"
 					on:click={newChatHandler}
@@ -1135,7 +1135,7 @@
 					<img
 						crossorigin="anonymous"
 						src="{WEBUI_BASE_URL}/static/arcade-logo.svg"
-						class="sidebar-new-chat-icon h-5 w-auto"
+						class="sidebar-new-chat-icon h-8 w-auto"
 						alt="Rancho BioSciences"
 					/>
 				</a>
@@ -1145,7 +1145,7 @@
 				<a href="/" class="flex flex-1 px-0.5" on:click={newChatHandler}>
 					<div
 						id="sidebar-webui-name"
-						class=" self-center font-primary text-gray-700 dark:text-gray-200"
+						class=" self-center font-medium text-2xl font-primary text-white whitespace-nowrap"
 					>
 						{$WEBUI_NAME}
 					</div>
@@ -1155,7 +1155,7 @@
 					placement="bottom"
 				>
 					<button
-						class="flex size-[30px] justify-center items-center rounded-lg hover:bg-gray-50 dark:hover:bg-gray-900 transition {isWindows
+						class="flex size-[30px] justify-center items-center rounded-lg hover:bg-white/10 dark:hover:bg-gray-900 transition {isWindows
 							? 'cursor-pointer'
 							: 'cursor-[w-resize]'}"
 						on:click={() => {
@@ -1181,10 +1181,10 @@
 				}}
 			>
 				<div class="pb-1">
-					<div class="px-1 flex justify-center text-gray-700 dark:text-gray-300">
+					<div class="px-1 flex justify-center text-gray-100">
 						<a
 							id="sidebar-new-chat-button"
-							class="group grow flex items-center space-x-2 rounded-xl px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-900 transition outline-none"
+							class="group grow flex items-center space-x-2 rounded-xl px-2 py-1.5 hover:bg-white/10 dark:hover:bg-gray-900 transition outline-none"
 							href="/"
 							draggable="false"
 							on:click={newChatHandler}
@@ -1202,10 +1202,10 @@
 						</a>
 					</div>
 
-					<div class="px-1 flex justify-center text-gray-700 dark:text-gray-300">
+					<div class="px-1 flex justify-center text-gray-100">
 						<button
 							id="sidebar-search-button"
-							class="group grow flex items-center space-x-2 rounded-xl px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-900 transition outline-none"
+							class="group grow flex items-center space-x-2 rounded-xl px-2 py-1.5 hover:bg-white/10 dark:hover:bg-gray-900 transition outline-none"
 							on:click={() => {
 								showSearch.set(true);
 							}}
@@ -1228,7 +1228,7 @@
 							{@const meta = getMenuItemMeta(itemId)}
 							{#if meta && isMenuItemVisible(itemId)}
 								<div
-									class="px-1 flex justify-center text-gray-700 dark:text-gray-300"
+									class="px-1 flex justify-center text-gray-100"
 									data-id={itemId}
 								>
 									<a
@@ -1236,9 +1236,9 @@
 										class="grow flex items-center space-x-2 rounded-xl px-2 py-1.5 transition {itemId ===
 										activeMenuItemId
 											? ($settings?.highContrastMode ?? false)
-												? 'bg-black/[0.035] dark:bg-white/[0.06]'
-												: 'bg-black/[0.035] dark:bg-white/[0.045]'
-											: 'hover:bg-gray-50 dark:hover:bg-gray-900'}"
+												? 'bg-white/20 dark:bg-gray-900'
+												: 'bg-white/20 dark:bg-gray-900'
+											: 'hover:bg-white/10 dark:hover:bg-gray-900'}"
 										href={meta.href}
 										on:click={itemClickHandler}
 										draggable="false"
@@ -1475,7 +1475,7 @@
 							<div slot="content">
 								<DropdownMenu className="min-w-[170px]">
 									<button
-										class="flex h-[1.6875rem] w-full items-center gap-2 rounded-xl px-2 text-[13px] select-none cursor-pointer hover:bg-gray-50/40 dark:hover:bg-gray-800/40"
+										class="flex h-[1.6875rem] w-full items-center gap-2 rounded-xl px-2 text-[13px] select-none cursor-pointer hover:bg-white/10 dark:hover:bg-gray-900"
 										on:click={markAllChatsReadHandler}
 									>
 										<CheckIcon className="size-3.5" />
@@ -1544,7 +1544,7 @@
 									name={$i18n.t('Pinned')}
 								>
 									<div
-										class="ml-3 pl-1 mt-[1px] flex flex-col overflow-y-auto scrollbar-hidden border-s border-gray-100 dark:border-gray-900 text-gray-700 dark:text-gray-300"
+										class="ml-3 pl-1 mt-[1px] flex flex-col overflow-y-auto scrollbar-hidden border-s border-gray-100 dark:border-gray-900 text-gray-100"
 									>
 										{#each $pinnedChats as chat, idx (`pinned-chat-${chat?.id ?? idx}`)}
 											<ChatItem
@@ -1681,7 +1681,7 @@
 						>
 							<button
 								type="button"
-								class=" flex items-center rounded-xl py-1.5 px-1.5 w-full hover:bg-gray-50 dark:hover:bg-gray-900 transition"
+								class=" flex items-center rounded-xl py-1.5 px-1.5 w-full hover:bg-[#FF8800]/25 transition"
 								aria-label={$i18n.t('User menu')}
 							>
 								<div class=" self-center mr-3 relative flex-shrink-0">
