@@ -150,6 +150,16 @@ def openai_reasoning_model_handler(payload):
         else:
             payload['messages'][0]['role'] = 'developer'
 
+    # Reasoning models (gpt-5+/o-series) reject function tools + reasoning_effort
+    # together on /chat/completions. Drop the tools (keep reasoning) so the model
+    # still answers normally; use the Responses pipe for reasoning + web search.
+    # Reasoning models on /chat/completions can't take function tools at all
+    # (OpenAI rejects tools + reasoning_effort). Drop tools so the model still
+    # answers; use the Responses pipe for reasoning + web search together.
+    if payload.get('tools'):
+        payload.pop('tools', None)
+        payload.pop('tool_choice', None)
+
     return payload
 
 
