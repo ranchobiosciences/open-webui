@@ -138,7 +138,7 @@
 	const shouldShowSettingGroup = (tabIds: string[], index: number) =>
 		index === 0 || settingGroupTitle(tabIds[index]) !== settingGroupTitle(tabIds[index - 1]);
 	const settingGroupHeadingClass = (first: boolean) =>
-		`hidden md:block shrink-0 text-[0.625rem] font-semibold text-[#E67A00] dark:text-[#FFB347] px-2 ${
+		`hidden md:block shrink-0 text-xs font-semibold text-[#4B5563] dark:text-[#9CA3AF] px-2 ${
 			first ? 'mt-0.5' : 'mt-2'
 		} mb-0.5`;
 
@@ -925,7 +925,7 @@
 			class="tabs scrollbar-none flex min-w-0 flex-1 min-h-0 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto md:flex-col p-1 pl-0 md:pl-1 gap-px"
 		>
 			<span
-				class="hidden md:block text-[0.625rem] font-semibold text-[#E67A00] dark:text-[#FFB347] px-2 mt-1.5 mb-0.5"
+				class="hidden md:block text-xs font-semibold text-[#4B5563] dark:text-[#9CA3AF] px-2 mt-1.5 mb-0.5"
 			>
 				{$i18n.t('Personal')}
 			</span>
@@ -1119,7 +1119,7 @@
 				<div
 					class="hidden md:block shrink-0 self-stretch h-px mx-1 my-2 bg-gray-100/40 dark:bg-white/[0.025]"
 				></div>
-				<span class="hidden md:block text-[0.625rem] font-semibold text-[#E67A00] dark:text-[#FFB347] px-2 mb-0.5">
+				<span class="hidden md:block text-xs font-semibold text-[#4B5563] dark:text-[#9CA3AF] px-2 mb-0.5">
 					{$i18n.t('Admin')}
 				</span>
 

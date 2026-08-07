@@ -330,9 +330,6 @@
 		...(items.find((item) => item.model?.connection_type === 'local')
 			? [{ value: 'connection:local', label: $i18n.t('Local') }]
 			: []),
-		...(items.find((item) => item.model?.connection_type === 'external')
-			? [{ value: 'connection:external', label: $i18n.t('External') }]
-			: []),
 		...(items.find((item) => item.model?.direct)
 			? [{ value: 'connection:direct', label: $i18n.t('Direct') }]
 			: []),
@@ -836,7 +833,7 @@
 							<button
 								type="button"
 								aria-pressed={selectedFilter === ''}
-								class="min-w-fit shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium capitalize transition-colors duration-100 {selectedFilter === ''
+								class="min-w-fit shrink-0 rounded-full px-2.5 py-1 text-[13px] font-medium capitalize transition-colors duration-100 {selectedFilter === ''
 									? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100'
 									: 'text-gray-500 hover:bg-gray-50/60 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800/40 dark:hover:text-gray-200'}"
 								on:click={() => setModelFilter('')}
@@ -848,7 +845,7 @@
 									type="button"
 									aria-pressed={selectedFilter === filterItem.value}
 									title={filterItem.label}
-									class="min-w-fit shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium capitalize transition-colors duration-100 {selectedFilter === filterItem.value
+									class="min-w-fit shrink-0 rounded-full px-2.5 py-1 text-[13px] font-medium capitalize transition-colors duration-100 {selectedFilter === filterItem.value
 										? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100'
 										: 'text-gray-500 hover:bg-gray-50/60 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800/40 dark:hover:text-gray-200'}"
 									on:click={() => setModelFilter(filterItem.value)}
