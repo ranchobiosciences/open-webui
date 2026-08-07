@@ -2242,7 +2242,7 @@
 											showSetDefault={!history?.currentId}
 											placement="auto"
 											align="end"
-											triggerClassName="items-center gap-1.5 rounded-lg pl-2 pr-1.5 py-1 text-[13px] font-normal text-gray-600 transition-colors duration-100 hover:bg-gray-50/40 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800/40 dark:hover:text-gray-200"
+											triggerClassName="items-center gap-1.5 rounded-lg pl-2 pr-1.5 py-1 text-[13px] font-normal text-black transition-colors duration-100 hover:bg-gray-50/40 hover:text-black dark:text-white dark:hover:bg-gray-800/40 dark:hover:text-white"
 										/>
 									</div>
 

@@ -942,3 +942,9 @@ html.high-contrast:not(.dark) #sidebar :is(.text-gray-300, .text-gray-400, .text
 /* settings-force-contrast: high-contrast text in Settings & Admin-Settings panels */
 .settings-force-contrast [class*="text-gray-"] { color: #000 !important; }
 .dark .settings-force-contrast [class*="text-gray-"] { color: #fff !important; }
+
+/* model-selector-panel: high-contrast text in the model selector dropdown */
+.model-selector-panel,
+.model-selector-panel [class*="text-gray-"] { color: #000 !important; }
+.dark .model-selector-panel,
+.dark .model-selector-panel [class*="text-gray-"] { color: #fff !important; }

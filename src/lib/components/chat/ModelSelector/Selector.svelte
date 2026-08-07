@@ -36,7 +36,6 @@
 	import Switch from '$lib/components/common/Switch.svelte';
 	import ChatBubbleOval from '$lib/components/icons/ChatBubbleOval.svelte';
 	import Keyframes from '$lib/components/icons/Keyframes.svelte';
-	import TagSelector from '$lib/components/workspace/common/TagSelector.svelte';
 
 	import ModelItem from './ModelItem.svelte';
 
@@ -63,7 +62,7 @@
 		[key: string]: any;
 	}[] = [];
 
-	export let className = 'w-[20rem]';
+	export let className = 'w-[30rem]';
 	export let triggerClassName = 'text-lg';
 	export let placement: 'top' | 'bottom' | 'auto' = 'bottom';
 	export let align: 'start' | 'end' = 'start';
@@ -765,7 +764,7 @@
 			<div
 				bind:this={panelElement}
 				class="z-40 {className ??
-					'w-[20rem]'} max-w-[calc(100vw-1rem)] justify-start rounded-xl border border-gray-100 bg-white p-0.5 shadow-lg outline-hidden dark:border-gray-800 dark:bg-gray-850 dark:text-white flex flex-col overflow-hidden"
+					'w-[30rem]'} max-w-[calc(100vw-1rem)] justify-start rounded-xl border border-gray-100 bg-white p-0.5 shadow-lg outline-hidden dark:border-gray-800 dark:bg-gray-850 dark:text-white flex flex-col overflow-hidden model-selector-panel"
 				style={dropdownPosition.maxHeight ? `max-height: ${dropdownPosition.maxHeight}px;` : ''}
 				transition:flyAndScale
 			>
@@ -825,23 +824,40 @@
 										</Tooltip>
 									{/if}
 
-									{#if modelFilterItems.length > 0}
-										<TagSelector
-											bind:value={selectedFilter}
-											placeholder={$i18n.t('All')}
-											align="end"
-											items={modelFilterItems}
-											triggerClass="relative flex h-[1.375rem] max-w-32 items-center gap-0.5 rounded-xl bg-transparent px-1.5 text-[11px] font-normal text-gray-400 transition-colors duration-100 hover:bg-gray-50/40 hover:text-gray-600 dark:text-gray-500 dark:hover:bg-gray-800/40 dark:hover:text-gray-300"
-											itemClass="flex h-[1.6875rem] w-full cursor-pointer items-center gap-2 rounded-xl bg-transparent px-2 text-[13px] capitalize hover:bg-gray-50/40 hover:text-gray-900 dark:hover:bg-gray-800/40 dark:hover:text-gray-100"
-											contentClass="min-w-36 model-selector-child-menu"
-											onChange={setModelFilter}
-										/>
-									{/if}
 								</div>
 							{/if}
 						</div>
 					{/if}
 
+					{#if modelFilterItems.length > 0}
+						<div
+							class="scrollbar-none -mx-0.5 mb-1 flex shrink-0 items-center gap-1 overflow-x-auto px-2 pt-0.5 pb-1"
+						>
+							<button
+								type="button"
+								aria-pressed={selectedFilter === ''}
+								class="min-w-fit shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium capitalize transition-colors duration-100 {selectedFilter === ''
+									? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100'
+									: 'text-gray-500 hover:bg-gray-50/60 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800/40 dark:hover:text-gray-200'}"
+								on:click={() => setModelFilter('')}
+							>
+								{$i18n.t('All')}
+							</button>
+							{#each modelFilterItems as filterItem (filterItem.value)}
+								<button
+									type="button"
+									aria-pressed={selectedFilter === filterItem.value}
+									title={filterItem.label}
+									class="min-w-fit shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium capitalize transition-colors duration-100 {selectedFilter === filterItem.value
+										? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100'
+										: 'text-gray-500 hover:bg-gray-50/60 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800/40 dark:hover:text-gray-200'}"
+									on:click={() => setModelFilter(filterItem.value)}
+								>
+									{filterItem.label.length > 20 ? filterItem.label.slice(0, 20) + '...' : filterItem.label}
+								</button>
+							{/each}
+						</div>
+					{/if}
 					<div class="group relative flex min-h-0 flex-1 flex-col">
 						{#if filteredItems.length === 0}
 							{#if items.length === 0 && $user?.role === 'admin'}
