@@ -89,7 +89,7 @@
 				class="px-0.5 py-1 min-w-fit rounded-lg lg:flex-none flex items-center gap-1.5 text-right transition select-none {selectedTab ===
 				'leaderboard'
 					? ''
-					: ' text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300'}"
+					: ' text-black dark:text-white hover:text-black dark:hover:text-gray-300'}"
 			>
 				<div class="self-center">{$i18n.t('Leaderboard')}</div>
 				{#if formattedLeaderboardCount !== null}
@@ -106,7 +106,7 @@
 				class="px-0.5 py-1 min-w-fit rounded-lg lg:flex-none flex items-center gap-1.5 text-right transition select-none {selectedTab ===
 				'feedback'
 					? ''
-					: ' text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300'}"
+					: ' text-black dark:text-white hover:text-black dark:hover:text-gray-300'}"
 			>
 				<div class="self-center">{$i18n.t('Feedback')}</div>
 				{#if formattedFeedbackCount !== null}

@@ -198,8 +198,8 @@
 			<div class="flex gap-4">
 				<button
 					class="py-2 text-sm font-normal border-b-2 transition-colors {selectedTab === 'overview'
-						? 'border-black dark:border-white text-gray-900 dark:text-white'
-						: 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}"
+						? 'border-black dark:border-white text-black dark:text-white'
+						: 'border-transparent text-black hover:text-black dark:hover:text-gray-300'}"
 					on:click={() => selectTab('overview')}
 				>
 					{$i18n.t('Overview')}
@@ -207,8 +207,8 @@
 				{#if $config?.features?.enable_admin_chat_access}
 					<button
 						class="py-2 text-sm font-normal border-b-2 transition-colors {selectedTab === 'chats'
-							? 'border-black dark:border-white text-gray-900 dark:text-white'
-							: 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}"
+							? 'border-black dark:border-white text-black dark:text-white'
+							: 'border-transparent text-black hover:text-black dark:hover:text-gray-300'}"
 						on:click={() => selectTab('chats')}
 					>
 						{$i18n.t('Chats')}

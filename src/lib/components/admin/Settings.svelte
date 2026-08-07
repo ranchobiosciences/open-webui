@@ -322,8 +322,8 @@
 	const tabButtonClass = (active) =>
 		`flex items-center gap-1.5 h-7 px-2 lg:w-full shrink-0 rounded-lg text-xs text-left transition-colors duration-75 select-none ${
 			active
-				? 'font-medium text-gray-900 dark:text-white bg-gray-100 dark:bg-white/6'
-				: 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+				? 'font-medium text-black dark:text-white bg-gray-100 dark:bg-white/6'
+				: 'text-black hover:text-black dark:hover:text-gray-300'
 		}`;
 
 	onMount(() => {
@@ -344,7 +344,7 @@
 	});
 </script>
 
-<div class="flex flex-col lg:flex-row w-full h-full min-h-0 pb-2">
+<div class="flex flex-col lg:flex-row w-full h-full min-h-0 pb-2 settings-force-contrast">
 	<nav
 		id="admin-settings-tabs-container"
 		class="shrink-0 min-w-0 lg:min-h-0 flex lg:block border-b lg:border-b-0 lg:border-r border-gray-100/30 dark:border-white/[0.02] lg:w-[15rem]"

@@ -174,7 +174,7 @@
 									class="px-0.5 py-1 max-w-fit w-fit rounded-lg flex-1 lg:flex-none flex text-right transition {selectedTab ===
 									'general'
 										? ''
-										: ' text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300'}"
+										: ' text-black dark:text-white hover:text-black dark:hover:text-gray-300'}"
 									on:click={() => {
 										selectedTab = 'general';
 									}}
@@ -203,7 +203,7 @@
 									class="px-0.5 py-1 max-w-fit w-fit rounded-lg flex-1 lg:flex-none flex text-right transition {selectedTab ===
 									'permissions'
 										? ''
-										: ' text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300'}"
+										: ' text-black dark:text-white hover:text-black dark:hover:text-gray-300'}"
 									on:click={() => {
 										selectedTab = 'permissions';
 									}}
@@ -221,7 +221,7 @@
 									class="px-0.5 py-1 max-w-fit w-fit rounded-lg flex-1 lg:flex-none flex text-right transition {selectedTab ===
 									'users'
 										? ''
-										: ' text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300'}"
+										: ' text-black dark:text-white hover:text-black dark:hover:text-gray-300'}"
 									on:click={() => {
 										selectedTab = 'users';
 									}}
@@ -239,7 +239,7 @@
 									class="px-0.5 py-1 max-w-fit w-fit rounded-lg flex-1 lg:flex-none flex text-right transition {selectedTab ===
 									'preview'
 										? ''
-										: ' text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'}"
+										: ' text-black dark:text-gray-600 hover:text-black dark:hover:text-white'}"
 									on:click={() => {
 										selectedTab = 'preview';
 									}}
@@ -338,7 +338,7 @@
 								class="px-0.5 pb-1.5 min-w-fit flex text-right transition border-b-2 {selectedTab ===
 								'display'
 									? ' dark:border-white'
-									: 'border-transparent text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300'}"
+									: 'border-transparent text-black dark:text-white hover:text-black dark:hover:text-gray-300'}"
 								on:click={() => {
 									selectedTab = 'display';
 								}}
@@ -353,7 +353,7 @@
 								class="px-0.5 pb-1.5 min-w-fit flex text-right transition border-b-2 {selectedTab ===
 								'permissions'
 									? '  dark:border-white'
-									: 'border-transparent text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300'}"
+									: 'border-transparent text-black dark:text-white hover:text-black dark:hover:text-gray-300'}"
 								on:click={() => {
 									selectedTab = 'permissions';
 								}}
@@ -368,7 +368,7 @@
 								class="px-0.5 pb-1.5 min-w-fit flex text-right transition border-b-2 {selectedTab ===
 								'users'
 									? ' dark:border-white'
-									: ' border-transparent text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300'}"
+									: ' border-transparent text-black dark:text-white hover:text-black dark:hover:text-gray-300'}"
 								on:click={() => {
 									selectedTab = 'users';
 								}}

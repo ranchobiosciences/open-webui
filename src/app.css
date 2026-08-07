@@ -938,3 +938,7 @@ html.high-contrast:not(.dark) .shimmer {
 html.high-contrast:not(.dark) #sidebar :is(.text-gray-300, .text-gray-400, .text-gray-500, .text-gray-600, .text-gray-700, .text-gray-800, .text-gray-900) {
 	color: var(--color-gray-300, #d1d5db);
 }
+
+/* settings-force-contrast: high-contrast text in Settings & Admin-Settings panels */
+.settings-force-contrast [class*="text-gray-"] { color: #000 !important; }
+.dark .settings-force-contrast [class*="text-gray-"] { color: #fff !important; }
