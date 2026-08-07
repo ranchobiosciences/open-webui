@@ -280,4 +280,13 @@
 			</div>
 		</div>
 	{/if}
+	<div class="mt-8 mb-1 flex w-full justify-center px-4" in:fade={{ duration: 200, delay: 250 }}>
+		<p class="text-xs text-gray-500 dark:text-gray-400">
+			For support or questions,
+			<a
+				href="mailto:aish.pathak@ranchobiosciences.com?subject=Rancho%20AI%20Arcade%20-%20Support%20Request"
+				class="font-medium text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white underline underline-offset-2 hover:no-underline transition-colors"
+			>Contact Admin</a>.
+		</p>
+	</div>
 </div>
