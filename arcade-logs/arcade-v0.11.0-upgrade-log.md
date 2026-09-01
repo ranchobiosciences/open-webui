@@ -13,6 +13,7 @@ records every issue found and the fix applied, for tracking and for the prod rol
 ## 0. Merge & build
 
 **What:** Merged upstream tag `v0.11.0` into the fork. 76 conflicts resolved.
+
 - i18n translations (61 files) → took upstream.
 - CI workflows (`.github/workflows/*`) → kept ours (upstream deleted them).
 - `ModelSettingsModal.svelte` → accepted upstream deletion (nothing referenced it).
@@ -20,6 +21,7 @@ records every issue found and the fix applied, for tracking and for the prod rol
 - All custom **backend** (native function-calling tools, `skills`, async `get_model_by_id`) auto-merged intact.
 
 **Build notes (important for prod):**
+
 - Frontend build OOMs with the default Node heap → must run:
   `NODE_OPTIONS=--max-old-space-size=8192 npm run build`
 - Backend deps: `pip install -r backend/requirements.txt` (no `uv` on the box).
@@ -29,7 +31,7 @@ records every issue found and the fix applied, for tracking and for the prod rol
 
 ---
 
-## 1. Startup crash — `WEBUI_SECRET_KEY` now mandatory  (commit `977ef6a06`)
+## 1. Startup crash — `WEBUI_SECRET_KEY` now mandatory (commit `977ef6a06`)
 
 **Issue:** 0.11.0 makes `WEBUI_SECRET_KEY` a hard requirement — `env.py` does
 `raise SystemExit(...)` if it is empty while auth is enabled. The service launches
@@ -69,7 +71,7 @@ current` / `history` / `stamp <rev>` / `upgrade head`. Back up the DB first.)
 
 ---
 
-## 3. Theme restoration  (commits `977ef6a06`, `9eb2b8466`)
+## 3. Theme restoration (commits `977ef6a06`, `9eb2b8466`)
 
 The merge favored upstream's neutral 0.11 styling; these restored the Arcade look.
 
@@ -97,7 +99,7 @@ The merge favored upstream's neutral 0.11 styling; these restored the Arcade loo
 
 ---
 
-## 4. SSO login button  (commit `665deb42f`)
+## 4. SSO login button (commit `665deb42f`)
 
 **Issue:** Clicking "Continue with Rancho Azure AD" did nothing but show
 "The email or password provided is incorrect."
@@ -113,7 +115,7 @@ was verified healthy (clean 302 to Microsoft with the correct
 
 ---
 
-## 5. SSO — EXPIRED Azure client secret  ⚠️ OPEN (external, not code)
+## 5. SSO — EXPIRED Azure client secret ⚠️ OPEN (external, not code)
 
 **Issue:** After the button fix, SSO reached Microsoft, came back to the callback,
 and failed. Log:
@@ -125,6 +127,7 @@ generic "email or password incorrect").
 the upgrade. Token exchange at `/v1/responses` /token fails.
 
 **Fix (NOT code — needs Azure AD admin / Rancho IT):**
+
 1. Azure portal → App registrations → app `238e756e-5c49-48d2-826e-99a61c4acf29`
    (tenant `72e6eb9a-fcb3-48b4-8dc5-7fb39a973cfa`) → Certificates & secrets →
    new client secret.
@@ -137,7 +140,7 @@ OIDC config lives in `.env` (`OAUTH_CLIENT_ID`, `OPENID_PROVIDER_URL`,
 
 ---
 
-## 6. Raw GPT reasoning models erroring on `/chat/completions`  (commit `a75d7f092`)
+## 6. Raw GPT reasoning models erroring on `/chat/completions` (commit `a75d7f092`)
 
 **Issue:** All raw `gpt-5.*` / `o-series` connection models returned only an error
 and no output:
@@ -156,7 +159,7 @@ pipe models (which use `/v1/responses`).
 
 ---
 
-## 7. Pipe strict mode vs. `update_memory`  ⚠️ DB-ONLY (not in git)
+## 7. Pipe strict mode vs. `update_memory` ⚠️ DB-ONLY (not in git)
 
 **Issue:** The pipe model `OpenAI: gpt-5.6-thinking-xhigh` (`/v1/responses` path)
 failed with:
@@ -213,6 +216,7 @@ a75d7f092  Fix raw reasoning models (gpt-5+/o-series) erroring on /chat/completi
    (connection 0 on `api.openai.com` + the pipe's `API_KEY` valve).
 
 ## Still open
+
 - Azure client secret rotation (Rancho IT) — standard SSO blocked until done.
 - Re-enable the admin "Default webhook" (`events.webhooks`, Azure Logic App) once
   SSO logs in cleanly — it was disabled to stop the new-user-signup email loop.

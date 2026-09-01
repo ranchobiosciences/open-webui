@@ -820,7 +820,6 @@
 											</button>
 										</Tooltip>
 									{/if}
-
 								</div>
 							{/if}
 						</div>
@@ -833,7 +832,8 @@
 							<button
 								type="button"
 								aria-pressed={selectedFilter === ''}
-								class="min-w-fit shrink-0 rounded-full px-2.5 py-1 text-[13px] font-medium capitalize transition-colors duration-100 {selectedFilter === ''
+								class="min-w-fit shrink-0 rounded-full px-2.5 py-1 text-[13px] font-medium capitalize transition-colors duration-100 {selectedFilter ===
+								''
 									? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100'
 									: 'text-gray-500 hover:bg-gray-50/60 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800/40 dark:hover:text-gray-200'}"
 								on:click={() => setModelFilter('')}
@@ -845,12 +845,15 @@
 									type="button"
 									aria-pressed={selectedFilter === filterItem.value}
 									title={filterItem.label}
-									class="min-w-fit shrink-0 rounded-full px-2.5 py-1 text-[13px] font-medium capitalize transition-colors duration-100 {selectedFilter === filterItem.value
+									class="min-w-fit shrink-0 rounded-full px-2.5 py-1 text-[13px] font-medium capitalize transition-colors duration-100 {selectedFilter ===
+									filterItem.value
 										? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100'
 										: 'text-gray-500 hover:bg-gray-50/60 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800/40 dark:hover:text-gray-200'}"
 									on:click={() => setModelFilter(filterItem.value)}
 								>
-									{filterItem.label.length > 20 ? filterItem.label.slice(0, 20) + '...' : filterItem.label}
+									{filterItem.label.length > 20
+										? filterItem.label.slice(0, 20) + '...'
+										: filterItem.label}
 								</button>
 							{/each}
 						</div>

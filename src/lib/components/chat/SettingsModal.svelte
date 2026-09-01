@@ -1119,7 +1119,9 @@
 				<div
 					class="hidden md:block shrink-0 self-stretch h-px mx-1 my-2 bg-gray-100/40 dark:bg-white/[0.025]"
 				></div>
-				<span class="hidden md:block text-xs font-semibold text-[#4B5563] dark:text-[#9CA3AF] px-2 mb-0.5">
+				<span
+					class="hidden md:block text-xs font-semibold text-[#4B5563] dark:text-[#9CA3AF] px-2 mb-0.5"
+				>
 					{$i18n.t('Admin')}
 				</span>
 
