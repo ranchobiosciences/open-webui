@@ -75,6 +75,8 @@
 	import ChannelModal from './Sidebar/ChannelModal.svelte';
 	import ChannelItem from './Sidebar/ChannelItem.svelte';
 	import SearchModal from './SearchModal.svelte';
+	import FAQModal from './FAQModal.svelte';
+	import HelpCircleIcon from './Sidebar/icons/HelpCircle.svelte';
 	import FolderModal from './Sidebar/Folders/FolderModal.svelte';
 	import PinnedModelList from './Sidebar/PinnedModelList.svelte';
 	import PinnedNoteList from './Sidebar/PinnedNoteList.svelte';
@@ -124,6 +126,7 @@
 
 	let showPinnedModels = false;
 	let showPinnedNotes = false;
+	let showFAQ = false;
 	let showChannels = false;
 	let showFolders = false;
 	let showSharedFolders = false;
@@ -909,6 +912,15 @@
 	}}
 />
 
+<FAQModal
+	bind:show={showFAQ}
+	onClose={() => {
+		if ($mobile) {
+			showSidebar.set(false);
+		}
+	}}
+/>
+
 <button
 	id="sidebar-new-chat-button"
 	class="hidden"
@@ -1009,6 +1021,28 @@
 								class=" self-center flex size-[30px] items-center justify-center rounded-lg transition group-hover:bg-white/10 dark:group-hover:bg-gray-900"
 							>
 								<SearchIcon className="size-4" strokeWidth="1.5" />
+							</div>
+						</button>
+					</Tooltip>
+				</div>
+
+				<div>
+					<Tooltip content={$i18n.t('FAQs')} placement="right">
+						<button
+							class=" cursor-pointer flex size-8 items-center justify-center transition group"
+							on:click={(e) => {
+								e.stopImmediatePropagation();
+								e.preventDefault();
+
+								showFAQ = true;
+							}}
+							draggable="false"
+							aria-label={$i18n.t('FAQs')}
+						>
+							<div
+								class=" self-center flex size-[30px] items-center justify-center rounded-lg transition group-hover:bg-white/10 dark:group-hover:bg-gray-900"
+							>
+								<HelpCircleIcon className="size-4" strokeWidth="1.5" />
 							</div>
 						</button>
 					</Tooltip>
@@ -1223,14 +1257,31 @@
 						</button>
 					</div>
 
+					<div class="px-1 flex justify-center text-gray-100">
+						<button
+							id="sidebar-faq-button"
+							class="group grow flex items-center space-x-2 rounded-xl px-2 py-1.5 hover:bg-white/10 dark:hover:bg-gray-900 transition outline-none"
+							on:click={() => {
+								showFAQ = true;
+							}}
+							draggable="false"
+							aria-label={$i18n.t('FAQs')}
+						>
+							<div class="self-center flex size-4 shrink-0 items-center justify-center">
+								<HelpCircleIcon strokeWidth="1.5" className="size-4" />
+							</div>
+
+							<div class="flex flex-1 self-center translate-y-[0.5px]">
+								<div class=" self-center text-[13px] leading-5">{$i18n.t('FAQs')}</div>
+							</div>
+						</button>
+					</div>
+
 					<div id="pinned-menu-items-list">
 						{#each pinnedItems as itemId (itemId)}
 							{@const meta = getMenuItemMeta(itemId)}
 							{#if meta && isMenuItemVisible(itemId)}
-								<div
-									class="px-1 flex justify-center text-gray-100"
-									data-id={itemId}
-								>
+								<div class="px-1 flex justify-center text-gray-100" data-id={itemId}>
 									<a
 										id="sidebar-{itemId}-button"
 										class="grow flex items-center space-x-2 rounded-xl px-2 py-1.5 transition {itemId ===
