@@ -144,9 +144,9 @@
 				<summary>Who is responsible for the accuracy of AI-generated outputs?</summary>
 				<div class="faq-a">
 					<p>
-						You are. Users are personally accountable for verifying that AI outputs are accurate,
-						complete, and fit for their intended purpose. AI never replaces human judgment, and
-						users are responsible for any AI-assisted work they submit.
+						Users are personally accountable for verifying that AI outputs are accurate, complete,
+						and fit for their intended purpose. AI never replaces human judgment, and users are
+						responsible for any AI-assisted work they submit.
 					</p>
 				</div>
 			</details>
@@ -172,28 +172,6 @@
 							>RPOL-DAT-01</span
 						>).
 					</p>
-				</div>
-			</details>
-
-			<!-- Section 4 -->
-			<div class="faq-eyebrow">Compliance, Reporting &amp; Support</div>
-
-			<details>
-				<summary
-					>What should I do if I suspect an AI-related security or compliance incident?</summary
-				>
-				<div class="faq-a">
-					<p>
-						Report it immediately to IT Security or RAISE. Prompt reporting is critical to limiting
-						risk.
-					</p>
-				</div>
-			</details>
-
-			<details>
-				<summary>What happens if someone violates the AI policy?</summary>
-				<div class="faq-a">
-					<p>Violations may result in disciplinary action, up to and including termination.</p>
 				</div>
 			</details>
 		</div>
