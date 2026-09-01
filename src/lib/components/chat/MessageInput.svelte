@@ -132,6 +132,39 @@
 
 	let selectedModelIds = [];
 	$: selectedModelIds = atSelectedModel !== undefined ? [atSelectedModel.id] : selectedModels;
+	// Deep Read: files uploaded while a model tagged 'deep-read' is selected default to
+	// full-document context (context: 'full'); the per-file toggle can still override.
+	$: isDeepReadModel = selectedModelIds.some((id) => {
+		const m = $models.find((model) => model.id === id);
+		const modelTags = m?.tags ?? m?.info?.meta?.tags ?? [];
+		return modelTags.some((t) => (t?.name ?? '').toLowerCase() === 'deep-read');
+	});
+
+	// Deep Read per-chat upload budget: cumulative document bytes are capped per chat and
+	// reset only when a new chat is started. Enforced only while a Deep Read model is selected.
+	const DEEP_READ_MAX_MB = 40;
+	const DEEP_READ_MAX_BYTES = DEEP_READ_MAX_MB * 1024 * 1024;
+	let deepReadBytesByChat = {};
+	let deepReadDraftBytes = 0;
+	let _deepReadPrevChatId = undefined;
+	// Reset the draft budget on a new chat (chatId === ''); carry it into the chat id once saved.
+	$: {
+		if (chatId !== _deepReadPrevChatId) {
+			if (chatId === '') {
+				deepReadDraftBytes = 0;
+			} else if (_deepReadPrevChatId === '') {
+				deepReadBytesByChat[chatId] = (deepReadBytesByChat[chatId] ?? 0) + deepReadDraftBytes;
+				deepReadDraftBytes = 0;
+			}
+			_deepReadPrevChatId = chatId;
+		}
+	}
+	const deepReadUsedBytes = () =>
+		chatId ? (deepReadBytesByChat[chatId] ?? 0) : deepReadDraftBytes;
+	const deepReadReserve = (bytes) => {
+		if (chatId) deepReadBytesByChat[chatId] = (deepReadBytesByChat[chatId] ?? 0) + bytes;
+		else deepReadDraftBytes += bytes;
+	};
 	$: hasChatVariables = selectedModelIds.some(
 		(modelId) =>
 			($models.find((model) => model.id === modelId)?.info?.meta?.chat_variables_schema?.fields
@@ -757,6 +790,40 @@
 			return null;
 		}
 
+		// Deep Read per-chat upload cap: enforced only while a Deep Read model is selected.
+		if (isDeepReadModel && (file?.size ?? 0) > 0) {
+			// A single document larger than the whole budget can never fit - a new chat won't help.
+			if (file.size > DEEP_READ_MAX_BYTES) {
+				toast.error(
+					$i18n.t(
+						'This document is {{size}} MB, which exceeds the {{max}} MB Deep Read limit. Please upload a smaller document.',
+						{ size: (file.size / (1024 * 1024)).toFixed(1), max: DEEP_READ_MAX_MB }
+					)
+				);
+				return null;
+			}
+			if (deepReadUsedBytes() + file.size > DEEP_READ_MAX_BYTES) {
+				toast.error(
+					$i18n.t(
+						'This chat has reached its {{max}} MB document limit for Deep Read. Please start a new chat to upload more.',
+						{ max: DEEP_READ_MAX_MB }
+					)
+				);
+				return null;
+			}
+			deepReadReserve(file.size);
+			// Soft warning as the chat approaches the cap (>= 80%).
+			const usedAfter = deepReadUsedBytes();
+			if (usedAfter >= DEEP_READ_MAX_BYTES * 0.8) {
+				toast.warning(
+					$i18n.t('Deep Read: you have used {{used}} of {{max}} MB of documents in this chat.', {
+						used: (usedAfter / (1024 * 1024)).toFixed(1),
+						max: DEEP_READ_MAX_MB
+					})
+				);
+			}
+		}
+
 		const tempItemId = uuidv4();
 		const fileItem = {
 			type: 'file',
@@ -771,7 +838,7 @@
 			itemId: tempItemId,
 			// Stamp the user's default upload mode so the sent payload carries it;
 			// the per-file toggle in FileItemModal can still override it afterwards.
-			...($settings?.defaultUploadContext === 'full' ? { context: 'full' } : {}),
+			...($settings?.defaultUploadContext === 'full' || isDeepReadModel ? { context: 'full' } : {}),
 			...itemData
 		};
 
@@ -1708,6 +1775,54 @@
 											/>
 										{/if}
 									{/each}
+								</div>
+							{/if}
+
+							{#if files.length > 0}
+								<div
+									class="mx-3 mb-1 flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400"
+									dir={$settings?.chatDirection ?? 'auto'}
+								>
+									{#if isDeepReadModel}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 20 20"
+											fill="currentColor"
+											aria-hidden="true"
+											class="size-3.5 shrink-0"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M4.25 2A2.25 2.25 0 002 4.25v11.5A2.25 2.25 0 004.25 18h11.5A2.25 2.25 0 0018 15.75V4.25A2.25 2.25 0 0015.75 2H4.25zM6 6.75A.75.75 0 016.75 6h6.5a.75.75 0 010 1.5h-6.5A.75.75 0 016 6.75zm.75 2.75a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5zm0 3a.75.75 0 000 1.5h3.5a.75.75 0 000-1.5h-3.5z"
+												clip-rule="evenodd"
+											/>
+										</svg>
+										<span
+											>{$i18n.t(
+												'Deep Read is enabled. This model reads your entire document. You can upload up to {{max}} MB of documents per chat.',
+												{ max: DEEP_READ_MAX_MB }
+											)}</span
+										>
+									{:else}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 20 20"
+											fill="currentColor"
+											aria-hidden="true"
+											class="size-3.5 shrink-0"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+												clip-rule="evenodd"
+											/>
+										</svg>
+										<span
+											>{$i18n.t(
+												'This model reads only the most relevant sections of your documents. Select a Deep Read model for full-document analysis.'
+											)}</span
+										>
+									{/if}
 								</div>
 							{/if}
 
