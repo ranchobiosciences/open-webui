@@ -4116,7 +4116,7 @@
 								</div>
 							</div>
 						{:else}
-							<div class="flex items-center h-full">
+							<div id="welcome-bg" class="flex items-center h-full">
 								<Placeholder
 									{history}
 									bind:selectedModels

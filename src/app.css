@@ -920,31 +920,85 @@ html.high-contrast:not(.dark) .shimmer {
 }
 
 /* Arcade fork fonts + classes (restored after v0.11 merge) */
-@font-face { font-family: "Archivo"; src: url("/assets/fonts/Archivo-Variable.ttf"); font-display: swap; }
-@font-face { font-family: "Mona Sans"; src: url("/assets/fonts/Mona-Sans.woff2"); font-display: swap; }
-@font-face { font-family: "InstrumentSerif"; src: url("/assets/fonts/InstrumentSerif-Regular.ttf"); font-display: swap; }
-.font-primary { font-family: "Archivo", "Vazirmatn", sans-serif; }
-.font-secondary { font-family: "InstrumentSerif", sans-serif; }
+@font-face {
+	font-family: 'Archivo';
+	src: url('/assets/fonts/Archivo-Variable.ttf');
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Mona Sans';
+	src: url('/assets/fonts/Mona-Sans.woff2');
+	font-display: swap;
+}
+@font-face {
+	font-family: 'InstrumentSerif';
+	src: url('/assets/fonts/InstrumentSerif-Regular.ttf');
+	font-display: swap;
+}
+.font-primary {
+	font-family: 'Archivo', 'Vazirmatn', sans-serif;
+}
+.font-secondary {
+	font-family: 'InstrumentSerif', sans-serif;
+}
 
 /* Arcade: dim muted grays were hard to read in dark mode — lighten a step to gray-400 */
-.dark .dark\:text-gray-600 { color: var(--color-gray-400); }
-.dark .dark\:text-gray-500 { color: var(--color-gray-400); }
-.dark .text-gray-500 { color: var(--color-gray-400); }
+.dark .dark\:text-gray-600 {
+	color: var(--color-gray-400);
+}
+.dark .dark\:text-gray-500 {
+	color: var(--color-gray-400);
+}
+.dark .text-gray-500 {
+	color: var(--color-gray-400);
+}
 
 /* Arcade: the sidebar is a green (dark) surface even in light mode. High-contrast
    mode darkens muted text for light backgrounds, which makes sidebar titles
    (folders, chats, etc.) invisible on the green. Keep sidebar text light here;
    high-contrast still applies everywhere else. */
-html.high-contrast:not(.dark) #sidebar :is(.text-gray-300, .text-gray-400, .text-gray-500, .text-gray-600, .text-gray-700, .text-gray-800, .text-gray-900) {
+html.high-contrast:not(.dark)
+	#sidebar
+	:is(
+		.text-gray-300,
+		.text-gray-400,
+		.text-gray-500,
+		.text-gray-600,
+		.text-gray-700,
+		.text-gray-800,
+		.text-gray-900
+	) {
 	color: var(--color-gray-300, #d1d5db);
 }
 
 /* settings-force-contrast: high-contrast text in Settings & Admin-Settings panels */
-.settings-force-contrast [class*="text-gray-"] { color: #000 !important; }
-.dark .settings-force-contrast [class*="text-gray-"] { color: #fff !important; }
+.settings-force-contrast [class*='text-gray-'] {
+	color: #000 !important;
+}
+.dark .settings-force-contrast [class*='text-gray-'] {
+	color: #fff !important;
+}
 
 /* model-selector-panel: high-contrast text in the model selector dropdown */
 .model-selector-panel,
-.model-selector-panel [class*="text-gray-"] { color: #000 !important; }
+.model-selector-panel [class*='text-gray-'] {
+	color: #000 !important;
+}
 .dark .model-selector-panel,
-.dark .model-selector-panel [class*="text-gray-"] { color: #fff !important; }
+.dark .model-selector-panel [class*='text-gray-'] {
+	color: #fff !important;
+}
+
+/* Rancho brand dot motif, shown only on the welcome/landing screen (the empty-chat
+   Placeholder). Once a conversation starts this element unmounts, so the chat view
+   stays clean and the dots never overlap conversation text. */
+#welcome-bg {
+	background-image: url('/assets/rancho-dots-light.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+.dark #welcome-bg {
+	background-image: url('/assets/rancho-dots-dark.png');
+}
