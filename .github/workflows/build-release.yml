@@ -35,9 +35,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "v${{ steps.get_version.outputs.version }}_rancho_v0.2" \
-            --title "v${{ steps.get_version.outputs.version }}_rancho" \
-            --notes-file /tmp/release-notes.md
+          BASE="v${{ steps.get_version.outputs.version }}_rancho_"
+          git fetch --tags --force -q || true
+          LAST=$(git tag -l "${BASE}*" | grep -oE '[0-9]+$' | sort -n | tail -1)
+          TAG="${BASE}$(( ${LAST:-0} + 1 ))"
+          gh release create "$TAG" --title "$TAG" --notes-file /tmp/release-notes.md
 
       - name: Upload package to GitHub release
         uses: actions/upload-artifact@v4
